@@ -1,13 +1,15 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import authRoutes from './routes/auth.mts'; // ✅ needs .mts extension
+import authRoutes from './routes/auth.mts';
+import protectedRoutes from './routes/protected.mts'; // 👈 Add this line
 
-dotenv.config(); // Load .env variables
+dotenv.config();
 
 const app = express();
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api', protectedRoutes); // 👈 Mount the new route here
 
 const PORT = process.env.PORT || 3000;
 
